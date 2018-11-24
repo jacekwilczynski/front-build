@@ -8,11 +8,11 @@ const WebpackClean = require('webpack-clean');
 
 // The webpack config generator
 module.exports = function getWebpackConfig({
-  devMode = process.env.NODE_ENV === 'development',
-  entry = './src/index.js',
-  outputPath = 'dist',
-  remove
-} = {}) {
+                                             devMode = process.env.NODE_ENV === 'development',
+                                             entry = './src/index.js',
+                                             outputPath = 'dist',
+                                             remove
+                                           } = {}) {
   return {
     entry,
     output: outputPath && { path: path.resolve(outputPath) },
@@ -46,7 +46,12 @@ module.exports = function getWebpackConfig({
             {
               loader: 'postcss-loader',
               options: {
-                plugins: [require('autoprefixer')(), require('cssnano')()]
+                plugins: [
+                  require('autoprefixer')(),
+                  require('css-mqpacker')(),
+                  require('postcss-combine-duplicated-selectors')(),
+                  require('cssnano')()
+                ]
               }
             },
             'sass-loader'
