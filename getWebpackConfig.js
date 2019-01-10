@@ -55,7 +55,13 @@ module.exports = function getWebpackConfig({
                 ]
               }
             },
-            { loader: 'sass-loader', options: { sourceMap: devMode } }
+            {
+              loader: 'sass-loader',
+              options: {
+                implementation: require('dart-sass'),
+                sourceMap: devMode
+              }
+            }
           ]
         }
       ]
