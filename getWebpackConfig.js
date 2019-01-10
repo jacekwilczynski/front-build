@@ -48,7 +48,7 @@ module.exports = function getWebpackConfig({
               options: {
                 plugins: [
                   require('autoprefixer')(),
-                  require('css-mqpacker')(),
+                  require('css-mqpacker')({ sort: true }),
                   require('postcss-combine-duplicated-selectors')(),
                   require('cssnano')()
                 ]
