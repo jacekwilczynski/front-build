@@ -33,6 +33,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "@babel/polyfill": "^7.2.5"
+    "@babel/polyfill": "^7.2.5",
+    "resolve-url-loader": "^3.0.0"
   }
 }

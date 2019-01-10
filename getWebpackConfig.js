@@ -60,7 +60,7 @@ module.exports = function getWebpackConfig({
             MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
-              options: { importLoaders: 2, sourceMap: devMode }
+              options: { importLoaders: 3, sourceMap: devMode }
             },
             {
               loader: 'postcss-loader',
@@ -74,11 +74,13 @@ module.exports = function getWebpackConfig({
                 ]
               }
             },
+            'resolve-url-loader',
             {
               loader: 'sass-loader',
               options: {
                 implementation: require('dart-sass'),
-                sourceMap: devTool
+                sourceMap: true,
+                sourceMapContents: true
               }
             }
           ]
