@@ -11,10 +11,14 @@ module.exports = function getWebpackConfig({
   devMode = process.env.NODE_ENV === 'development',
   entry = './src/index.js',
   outputPath = 'dist',
-  remove
+  remove,
+  externals,
+  alias
 } = {}) {
   return {
     entry,
+    externals,
+    resolve: { alias },
     output: outputPath && { path: path.resolve(outputPath) },
     mode: devMode ? 'development' : 'production',
     devtool: devMode && 'inline-source-map',
