@@ -17,7 +17,7 @@ module.exports = function getWebpackConfig({
     entry,
     output: outputPath && { path: path.resolve(outputPath) },
     mode: devMode ? 'development' : 'production',
-    devtool: devMode && 'cheap-module-eval-source-map',
+    devtool: devMode && 'inline-source-map',
     plugins: [
       ...(remove
         ? [new WebpackClean(remove.map(item => path.join(outputPath, item)))]
@@ -32,7 +32,7 @@ module.exports = function getWebpackConfig({
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: { presets: ['@babel/preset-env'] }
+            options: { presets: ['@babel/preset-env'], sourceMap: devMode }
           }
         },
         {
@@ -41,11 +41,12 @@ module.exports = function getWebpackConfig({
             MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
-              options: { importLoaders: 2 }
+              options: { importLoaders: 2, sourceMap: devMode }
             },
             {
               loader: 'postcss-loader',
               options: {
+                sourceMap: devMode,
                 plugins: [
                   require('autoprefixer')(),
                   require('css-mqpacker')({ sort: true }),
@@ -54,7 +55,7 @@ module.exports = function getWebpackConfig({
                 ]
               }
             },
-            'sass-loader'
+            { loader: 'sass-loader', options: { sourceMap: devMode } }
           ]
         }
       ]
