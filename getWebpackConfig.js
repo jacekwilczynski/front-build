@@ -11,6 +11,7 @@ module.exports = function getWebpackConfig({
   devMode = process.env.NODE_ENV === 'development',
   entry = './src/index.js',
   outputPath = 'dist',
+  roots = [],
   remove,
   externals,
   alias
@@ -18,10 +19,16 @@ module.exports = function getWebpackConfig({
   return {
     entry,
     externals,
-    resolve: { alias },
     output: outputPath && { path: path.resolve(outputPath) },
     mode: devMode ? 'development' : 'production',
     devtool: devMode && 'inline-source-map',
+    resolve: {
+      alias,
+      modules: [
+        ...roots.map(dir => path.resolve(__dirname, dir)),
+        'node_modules'
+      ]
+    },
     plugins: [
       ...(remove
         ? [new WebpackClean(remove.map(item => path.join(outputPath, item)))]
