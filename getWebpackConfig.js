@@ -43,7 +43,14 @@ module.exports = function getWebpackConfig({
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: { presets: ['@babel/preset-env'], sourceMap: devMode }
+            options: {
+              presets: [['@babel/preset-env', { useBuiltIns: 'usage' }]],
+              plugins: [
+                '@babel/plugin-proposal-class-properties',
+                ['@babel/plugin-proposal-decorators', { legacy: true }]
+              ],
+              sourceMap: devMode
+            }
           }
         },
         {
