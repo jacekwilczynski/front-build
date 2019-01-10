@@ -60,7 +60,7 @@ module.exports = function getWebpackConfig({
             MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
-              options: { importLoaders: 3, sourceMap: devMode }
+              options: { importLoaders: 3, sourceMap: devMode, url: true }
             },
             {
               loader: 'postcss-loader',
@@ -78,12 +78,27 @@ module.exports = function getWebpackConfig({
             {
               loader: 'sass-loader',
               options: {
-                implementation: require('dart-sass'),
                 sourceMap: true,
                 sourceMapContents: true
               }
             }
           ]
+        },
+        {
+          test: [
+            /\.jpe?g$/,
+            /\.png/,
+            /\.gif$/,
+            /\.webp/,
+            /\.svg$/,
+            /\.eot$/,
+            /\.ttf$/,
+            /\.woff2?$/
+          ],
+          use: {
+            loader: 'url-loader',
+            options: { limit: 512, name: '[name].[ext]' }
+          }
         }
       ]
     }
