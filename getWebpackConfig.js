@@ -9,15 +9,16 @@ const WebpackClean = require('webpack-clean');
 // The webpack config generator
 module.exports = function getWebpackConfig({
   devMode = process.env.NODE_ENV === 'development',
-  entry = './src/index.js',
-  outputPath = 'dist',
+  scripts = {},
+  styles = {},
   roots = [],
-  remove,
+  outputPath = 'build',
   externals,
   alias
 } = {}) {
+  const toRemove = Object.keys(styles).map(key => key + '.js');
   return {
-    entry,
+    entry: { ...scripts, ...styles },
     externals,
     output: outputPath && { path: path.resolve(outputPath) },
     mode: devMode ? 'development' : 'production',
@@ -30,8 +31,8 @@ module.exports = function getWebpackConfig({
       ]
     },
     plugins: [
-      ...(remove
-        ? [new WebpackClean(remove.map(item => path.join(outputPath, item)))]
+      ...(toRemove
+        ? [new WebpackClean(toRemove.map(item => path.join(outputPath, item)))]
         : []),
       new CleanWebpackPlugin([outputPath]),
       new MiniCssExtractPlugin()
@@ -77,7 +78,7 @@ module.exports = function getWebpackConfig({
               loader: 'sass-loader',
               options: {
                 implementation: require('dart-sass'),
-                sourceMap: devMode
+                sourceMap: devTool
               }
             }
           ]
