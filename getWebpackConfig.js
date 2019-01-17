@@ -13,6 +13,7 @@ module.exports = function getWebpackConfig({
   styles = {},
   roots = [],
   outputPath = 'build',
+  sassFunctions,
   externals,
   alias
 } = {}) {
@@ -79,7 +80,8 @@ module.exports = function getWebpackConfig({
               loader: 'sass-loader',
               options: {
                 sourceMap: true,
-                sourceMapContents: true
+                sourceMapContents: true,
+                functions: sassFunctions
               }
             }
           ]
