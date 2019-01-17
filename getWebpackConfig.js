@@ -85,6 +85,10 @@ module.exports = function getWebpackConfig({
           ]
         },
         {
+          test: /\.twig$/,
+          use: 'twig-loader'
+        },
+        {
           test: [
             /\.jpe?g$/,
             /\.png/,
