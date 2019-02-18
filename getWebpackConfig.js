@@ -3,6 +3,7 @@ const path = require('path');
 
 // Webpack plugins
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackClean = require('webpack-clean');
 
@@ -13,6 +14,7 @@ module.exports = function getWebpackConfig({
   styles = {},
   roots = [],
   outputPath = 'build',
+  copy = [],
   sassFunctions,
   externals,
   alias
@@ -36,7 +38,8 @@ module.exports = function getWebpackConfig({
         ? [new WebpackClean(toRemove.map(item => path.join(outputPath, item)))]
         : []),
       new CleanWebpackPlugin([outputPath]),
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
+      new CopyPlugin(copy.map(source => ({ from: source, flatten: true })))
     ],
     module: {
       rules: [
