@@ -14,7 +14,7 @@ module.exports = require('./getWebpackConfig')({
   }
 };
 ```
-Creates `build/style-mainmainStyle.css`.
+Creates `build/style-main.css`.
 
 #### Just compile my JavaScript
 ```JS
