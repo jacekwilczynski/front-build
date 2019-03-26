@@ -10,27 +10,27 @@ You write a small `webpack.config.js` with only the stuff that's relevant to you
 ```JS
 module.exports = require('./getWebpackConfig')({
   styles: {
-    mainStyle: './sass/index.scss'
+    'style-main': './sass/index.scss'
   }
 };
 ```
-Creates `build/mainStyle.css`.
+Creates `build/style-mainmainStyle.css`.
 
 #### Just compile my JavaScript
 ```JS
 module.exports = require('./getWebpackConfig')({
   scripts: {
-    mainScript: './js/index.js'
+    'script-main': './js/index.js'
   }
 };
 ```
-Creates `build/mainScript.js`.
+Creates `build/script-main.js`.
 
 #### Compile Sass and JavaScript
 ```JS
 module.exports = require('./getWebpackConfig')({
   styles: { style: './sass/index.scss' },
-  scripts: { script: './sass/index.js' }
+  scripts: { script: './js/index.js' }
 };
 ```
 Creates:
