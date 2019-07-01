@@ -2,23 +2,23 @@
 const path = require('path');
 
 // Webpack plugins
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackClean = require('webpack-clean');
 
 // The webpack config generator
 module.exports = function getWebpackConfig({
-  devMode = process.env.NODE_ENV === 'development',
-  scripts = {},
-  styles = {},
-  roots = [],
-  outputPath = 'build',
-  copy = [],
-  sassFunctions,
-  externals,
-  alias
-} = {}) {
+                                             devMode = process.env.NODE_ENV === 'development',
+                                             scripts = {},
+                                             styles = {},
+                                             roots = [],
+                                             outputPath = 'build',
+                                             copy = [],
+                                             sassFunctions,
+                                             externals,
+                                             alias
+                                           } = {}) {
   const toRemove = Object.keys(styles).map(key => key + '.js');
   return {
     entry: { ...scripts, ...styles },
@@ -37,7 +37,7 @@ module.exports = function getWebpackConfig({
       ...(toRemove
         ? [new WebpackClean(toRemove.map(item => path.join(outputPath, item)))]
         : []),
-      new CleanWebpackPlugin([outputPath]),
+      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin(),
       new CopyPlugin(copy.map(source => ({ from: source, flatten: true })))
     ],
