@@ -15,7 +15,6 @@ module.exports = function getWebpackConfig({
   roots = [],
   outputPath = 'build',
   copy = [],
-  sassFunctions,
   externals,
   alias
 } = {}) {
@@ -84,7 +83,6 @@ module.exports = function getWebpackConfig({
               options: {
                 sourceMap: true,
                 sourceMapContents: true,
-                functions: sassFunctions
               }
             }
           ]
