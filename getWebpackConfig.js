@@ -93,6 +93,7 @@ module.exports = function getWebpackConfig({
         },
         {
           test: [
+            /\.txt$/,
             /\.jpe?g$/,
             /\.png/,
             /\.gif$/,
